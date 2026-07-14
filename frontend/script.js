@@ -1,20 +1,38 @@
-// ======================
-// Get HTML Elements
-// ======================
+// ================================
+// Language Translator Script
+// Developed by Nadia Abbas
+// ================================
+
+// ---------- Get Elements ----------
 
 const inputText = document.getElementById("inputText");
+const outputText = document.getElementById("outputText");
+
 const sourceLang = document.getElementById("sourceLang");
 const targetLang = document.getElementById("targetLang");
+
 const translateBtn = document.getElementById("translateBtn");
-const outputText = document.getElementById("outputText");
 const copyBtn = document.getElementById("copyBtn");
+const speakBtn = document.getElementById("speakBtn");
 const clearBtn = document.getElementById("clearBtn");
 const swapBtn = document.getElementById("swapBtn");
-const speakBtn = document.getElementById("speakBtn");
 
-// ======================
+// ---------- Language Map ----------
+
+const languageMap = {
+    en: "en-US",
+    ur: "ur-PK",
+    fr: "fr-FR",
+    de: "de-DE",
+    es: "es-ES",
+    ar: "ar-SA",
+    hi: "hi-IN",
+    ja: "ja-JP"
+};
+
+// ================================
 // Translate
-// ======================
+// ================================
 
 translateBtn.addEventListener("click", async () => {
 
@@ -31,75 +49,116 @@ translateBtn.addEventListener("click", async () => {
     }
 
     translateBtn.disabled = true;
-    translateBtn.innerHTML = "Translating...";
+    translateBtn.innerHTML =
+        '<i class="fa-solid fa-spinner fa-spin"></i> Translating...';
 
     try {
 
         const response = await fetch("/translate", {
+
             method: "POST",
+
             headers: {
                 "Content-Type": "application/json"
             },
+
             body: JSON.stringify({
+
                 text: text,
                 source: sourceLang.value,
                 target: targetLang.value
+
             })
+
         });
 
         if (!response.ok) {
-            throw new Error("Translation Failed");
+
+            throw new Error("Server Error");
+
         }
 
         const data = await response.json();
 
-        outputText.value = data.translated;
+        console.log("Translated:", data.translated);
 
-    } catch (error) {
+outputText.value = data.translated;
+
+console.log("Textarea:", outputText.value);
+
+    }
+
+    catch (error) {
 
         console.error(error);
+
         alert("Translation Failed!");
 
-    } finally {
+    }
+
+    finally {
 
         translateBtn.disabled = false;
-        translateBtn.innerHTML = "Translate";
+
+        translateBtn.innerHTML =
+            '<i class="fa-solid fa-language"></i> Translate';
 
     }
 
 });
+// ================================
+// Copy Button
+// ================================
 
-// ======================
-// Copy
-// ======================
+copyBtn.addEventListener("click", async () => {
 
-copyBtn.addEventListener("click", () => {
+    const text = outputText.value.trim();
 
-    if (outputText.value.trim() === "") {
+    if (text === "") {
         alert("Nothing to Copy!");
         return;
     }
 
-    navigator.clipboard.writeText(outputText.value);
+    try {
 
-    alert("Copied Successfully!");
+        await navigator.clipboard.writeText(text);
+
+        copyBtn.innerHTML =
+            '<i class="fa-solid fa-check"></i> Copied';
+
+        setTimeout(() => {
+
+            copyBtn.innerHTML =
+                '<i class="fa-solid fa-copy"></i> Copy';
+
+        }, 1500);
+
+    } catch {
+
+        alert("Copy Failed!");
+
+    }
 
 });
 
-// ======================
-// Clear
-// ======================
+
+// ================================
+// Clear Button
+// ================================
 
 clearBtn.addEventListener("click", () => {
 
     inputText.value = "";
     outputText.value = "";
 
+    inputText.focus();
+
 });
 
-// ======================
+
+// ================================
 // Swap Languages
-// ======================
+// ================================
 
 swapBtn.addEventListener("click", () => {
 
@@ -113,31 +172,50 @@ swapBtn.addEventListener("click", () => {
 
 });
 
+
+// ================================
+// Speak Button
+// ================================
+
+// ================================
+// Speak Button
+// ================================
+
+// ================================
+// Speak Button
+// ================================
+
+// ================================
+// Speak Button
+// ================================
+
+// ======================
+// Speak
+// ======================
+
 // ======================
 // Speak
 // ======================
 
 speakBtn.addEventListener("click", () => {
 
+    console.log("Speak button clicked");
+
     const text = outputText.value.trim();
 
-    if (text === "") {
+    if (!text) {
         alert("Nothing to Speak!");
         return;
     }
 
-    // Stop any previous speech
-    window.speechSynthesis.cancel();
+    speechSynthesis.cancel();
 
     const utterance = new SpeechSynthesisUtterance(text);
-
-    // Use selected target language
-    utterance.lang = targetLang.value;
 
     utterance.rate = 1;
     utterance.pitch = 1;
     utterance.volume = 1;
 
-    window.speechSynthesis.speak(utterance);
+    speechSynthesis.speak(utterance);
 
 });

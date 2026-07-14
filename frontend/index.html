@@ -1,226 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Language Translator | CodeAlpha</title>
 
-    <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome -->
     <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
     <link rel="stylesheet" href="/frontend/style.css">
-
 </head>
 
 <body>
 
-    <!-- Navbar -->
+<!-- ================= NAVBAR ================= -->
 
-    <nav>
+<nav>
 
-        <h2><i class="fa-solid fa-language"></i> Language Translator</h2>
+<div class="logo">
+<i class="fa-solid fa-language"></i>
+<span>Language Translator</span>
+</div>
 
-        <ul>
+<ul>
 
-            <li><a href="#">Home</a></li>
+<li><a href="#home">Home</a></li>
+<li><a href="#translator">Translator</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#about">About</a></li>
 
-            <li><a href="#">Features</a></li>
+</ul>
 
-            <li><a href="#">About</a></li>
+</nav>
 
-        </ul>
+<!-- ================= HERO ================= -->
 
-    </nav>
+<section class="hero" id="home">
 
+<h1>Translate Instantly Into 100+ Languages</h1>
 
-    <!-- Hero Section -->
+<p>
+Translate any text quickly using FastAPI and Google Translate.
+Fast, simple and accurate.
+</p>
 
-    <section class="hero">
+<a href="#translator" class="hero-btn">
+Start Translating
+</a>
 
-        <h1>Translate Instantly</h1>
+</section>
 
-        <p>
-            Translate your text into multiple languages
-            using FastAPI and Google Translate API.
-        </p>
+<!-- ================= TRANSLATOR ================= -->
 
-    </section>
+<section id="translator">
 
+<div class="container">
 
-    <!-- Translator Card -->
+<h2>
 
-    <div class="container">
+<i class="fa-solid fa-language"></i>
 
-        <h2>Language Translation Tool</h2>
+Language Translation Tool
 
-        <label>Enter Text</label>
+</h2>
 
-        <textarea
-            id="inputText"
-            placeholder="Enter your text here..."></textarea>
+<label>Enter Text</label>
 
-        <div class="language-row">
+<textarea
+id="inputText"
+placeholder="Type something..."></textarea>
 
-            <div>
+<div class="language-row">
 
-                <label>Source Language</label>
+<div>
 
-                <select id="sourceLang">
+<label>Source</label>
 
-                    <option value="en">English</option>
-                    <option value="ur">Urdu</option>
-                    <option value="fr">French</option>
-                    <option value="de">German</option>
-                    <option value="es">Spanish</option>
-                    <option value="ar">Arabic</option>
-                    <option value="hi">Hindi</option>
-                    <option value="ja">Japanese</option>
+<select id="sourceLang">
 
-                </select>
+<option value="en">English</option>
+<option value="ur">Urdu</option>
+<option value="fr">French</option>
+<option value="de">German</option>
+<option value="es">Spanish</option>
+<option value="ar">Arabic</option>
+<option value="hi">Hindi</option>
+<option value="ja">Japanese</option>
 
-            </div>
+</select>
 
-            <button id="swapBtn">
-                <i class="fa-solid fa-right-left"></i>
-            </button>
+</div>
 
-            <div>
+<button id="swapBtn">
 
-                <label>Target Language</label>
+<i class="fa-solid fa-right-left"></i>
 
-                <select id="targetLang">
+</button>
 
-                    <option value="ur">Urdu</option>
-                    <option value="en">English</option>
-                    <option value="fr">French</option>
-                    <option value="de">German</option>
-                    <option value="es">Spanish</option>
-                    <option value="ar">Arabic</option>
-                    <option value="hi">Hindi</option>
-                    <option value="ja">Japanese</option>
+<div>
 
-                </select>
+<label>Target</label>
 
-            </div>
+<select id="targetLang">
 
-        </div>
+<option value="ur">Urdu</option>
+<option value="en">English</option>
+<option value="fr">French</option>
+<option value="de">German</option>
+<option value="es">Spanish</option>
+<option value="ar">Arabic</option>
+<option value="hi">Hindi</option>
+<option value="ja">Japanese</option>
 
+</select>
 
-        <button id="translateBtn">
+</div>
 
-            <i class="fa-solid fa-language"></i>
+</div>
 
-            Translate
+<button id="translateBtn">
 
-        </button>
+<i class="fa-solid fa-language"></i>
 
+Translate
 
-        <label>Translated Text</label>
+</button>
 
-        <textarea
-            id="outputText"
-            readonly
-            placeholder="Translation will appear here..."></textarea>
+<label>Translated Text</label>
 
+<textarea
+id="outputText"
+readonly
+placeholder="Translation appears here..."></textarea>
 
-        <div class="buttons">
+<div class="buttons">
 
-            <button id="copyBtn">
+<button id="copyBtn">
+<i class="fa-solid fa-copy"></i>
+Copy
+</button>
 
-                <i class="fa-solid fa-copy"></i>
+<button id="speakBtn">
+<i class="fa-solid fa-volume-high"></i>
+Speak
+</button>
 
-                Copy
+<button id="clearBtn">
+<i class="fa-solid fa-trash"></i>
+Clear
+</button>
 
-            </button>
+</div>
 
-            <button id="speakBtn">
+</div>
 
-                <i class="fa-solid fa-volume-high"></i>
+</section>
 
-                Speak
+<!-- ================= FEATURES ================= -->
 
-            </button>
+<section class="features" id="features">
 
-            <button id="clearBtn">
+<h2>Features</h2>
 
-                <i class="fa-solid fa-trash"></i>
+<div class="feature-grid">
 
-                Clear
+<div class="feature-card">
+<i class="fa-solid fa-earth-americas"></i>
+<h3>100+ Languages</h3>
+<p>Translate between many different languages.</p>
+</div>
 
-            </button>
+<div class="feature-card">
+<i class="fa-solid fa-copy"></i>
+<h3>Copy</h3>
+<p>Copy translated text instantly.</p>
+</div>
 
-        </div>
+<div class="feature-card">
+<i class="fa-solid fa-volume-high"></i>
+<h3>Text To Speech</h3>
+<p>Listen to translated text.</p>
+</div>
 
-    </div>
+<div class="feature-card">
+<i class="fa-solid fa-bolt"></i>
+<h3>Fast API</h3>
+<p>Powered by FastAPI backend.</p>
+</div>
 
+<div class="feature-card">
+<i class="fa-solid fa-right-left"></i>
+<h3>Swap</h3>
+<p>Swap source and target languages.</p>
+</div>
 
-    <!-- Features -->
+<div class="feature-card">
+<i class="fa-solid fa-trash"></i>
+<h3>Clear</h3>
+<p>Clear text with one click.</p>
+</div>
 
-    <section class="features">
+</div>
 
-        <div class="feature-card">
+</section>
 
-            <i class="fa-solid fa-earth-americas"></i>
+<!-- ================= ABOUT ================= -->
 
-            <h3>Multi Language</h3>
+<section class="about" id="about">
 
-            <p>Translate text into different languages instantly.</p>
+<h2>About Project</h2>
 
-        </div>
+<p>
 
-        <div class="feature-card">
+This project was developed for the
+<strong>CodeAlpha Python Programming Internship.</strong>
 
-            <i class="fa-solid fa-copy"></i>
+It uses HTML, CSS, JavaScript,
+FastAPI and Google Translate API.
 
-            <h3>Copy Text</h3>
+</p>
 
-            <p>Copy translated text with one click.</p>
+<div class="tech-stack">
 
-        </div>
+<span>HTML5</span>
+<span>CSS3</span>
+<span>JavaScript</span>
+<span>Python</span>
+<span>FastAPI</span>
 
-        <div class="feature-card">
+</div>
 
-            <i class="fa-solid fa-volume-high"></i>
+</section>
 
-            <h3>Text To Speech</h3>
+<!-- ================= FOOTER ================= -->
 
-            <p>Listen to translated text easily.</p>
+<footer>
 
-        </div>
+<h3>
 
-    </section>
+<i class="fa-solid fa-language"></i>
 
+Language Translator
 
-    <!-- Footer -->
+</h3>
 
-    <footer>
+<p>Developed by <strong>Nadia Abbas</strong></p>
 
-        <p>
+<p>CodeAlpha Internship Project</p>
 
-            Developed by <b>Nadia Abbas</b>
+<p>© 2026 All Rights Reserved</p>
 
-            <br>
+</footer>
 
-            CodeAlpha Internship Project
-
-        </p>
-
-    </footer>
-
-
-    <script src="/frontend/script.js"></script>
+<script src="/frontend/script.js"></script>
 
 </body>
-
 </html>

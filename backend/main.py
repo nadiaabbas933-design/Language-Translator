@@ -41,12 +41,19 @@ async def home():
 @app.post("/translate")
 async def translate_text(request: TranslationRequest):
 
-    translated = translator.translate(
-        request.text,
-        src=request.source,
-        dest=request.target
-    )
+    try:
+        translated = translator.translate(
+            request.text,
+            src=request.source,
+            dest=request.target
+        )
 
-    return {
-        "translated": translated.text
-    }
+        return {
+            "translated": translated.text
+        }
+
+    except Exception as e:
+        print("ERROR:", e)
+        return {
+            "translated": f"Error: {str(e)}"
+        }
