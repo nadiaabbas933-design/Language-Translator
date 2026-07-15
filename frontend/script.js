@@ -16,7 +16,16 @@ const copyBtn = document.getElementById("copyBtn");
 const speakBtn = document.getElementById("speakBtn");
 const clearBtn = document.getElementById("clearBtn");
 const swapBtn = document.getElementById("swapBtn");
-
+const charCount = document.getElementById("charCount");
+const wordCount = document.getElementById("wordCount");
+const status = document.getElementById("status");
+const progressBar =
+document.getElementById("progressBar");
+const themeToggle = document.getElementById("themeToggle");
+const toast=document.getElementById("toast");
+const historyList =
+document.getElementById("historyList");
+const downloadBtn = document.getElementById("downloadBtn");
 // ---------- Language Map ----------
 
 const languageMap = {
@@ -29,6 +38,31 @@ const languageMap = {
     hi: "hi-IN",
     ja: "ja-JP"
 };
+inputText.addEventListener("input", () => {
+
+    const text = inputText.value;
+
+    charCount.textContent =
+        "Characters: " + text.length;
+
+    const words = text.trim() === ""
+        ? 0
+        : text.trim().split(/\s+/).length;
+
+    wordCount.textContent =
+        "Words: " + words;
+        const percentage =
+(text.length / 5000) * 100;
+
+progressBar.style.width =
+percentage + "%";
+if (text.length > 4500) {
+
+    showToast("Character limit is almost reached!", "warning");
+
+}
+
+});
 
 // ================================
 // Translate
@@ -39,14 +73,15 @@ translateBtn.addEventListener("click", async () => {
     const text = inputText.value.trim();
 
     if (text === "") {
-        alert("Please enter some text.");
+        showToast("Please enter some text","warning");
         return;
     }
 
-    if (sourceLang.value === targetLang.value) {
-        alert("Source and Target language cannot be the same.");
-        return;
-    }
+    //if (sourceLang.value === targetLang.value) {
+      //  alert("Source and Target language cannot be the same.");
+        //return;
+   // }
+   status.textContent = "Translating...";
 
     translateBtn.disabled = true;
     translateBtn.innerHTML =
@@ -83,18 +118,28 @@ translateBtn.addEventListener("click", async () => {
         console.log("Translated:", data.translated);
 
 outputText.value = data.translated;
+localStorage.setItem("lastTranslation", data.translated);
+addHistory(
+inputText.value,
+data.translated
+);
+status.textContent = "Translation Completed ✓";
+status.className = "status-success";
 
 console.log("Textarea:", outputText.value);
 
     }
 
-    catch (error) {
+   catch (error) {
 
-        console.error(error);
+    console.error(error);
 
-        alert("Translation Failed!");
+    status.textContent = "Translation Failed";
+    status.className = "status-error";
 
-    }
+    showToast("Translation Failed","error");
+
+}
 
     finally {
 
@@ -115,7 +160,7 @@ copyBtn.addEventListener("click", async () => {
     const text = outputText.value.trim();
 
     if (text === "") {
-        alert("Nothing to Copy!");
+        showToast("Nothing to Copy","warning");
         return;
     }
 
@@ -130,14 +175,28 @@ copyBtn.addEventListener("click", async () => {
 
             copyBtn.innerHTML =
                 '<i class="fa-solid fa-copy"></i> Copy';
+                copyBtn.style.transform = "scale(1.1)";
+                
+
+setTimeout(() => {
+
+    clearBtn.style.transform = "rotate(0deg)";
+
+},500);
+
+setTimeout(() => {
+
+    copyBtn.style.transform = "scale(1)";
+
+}, 300);
 
         }, 1500);
 
     } catch {
 
-        alert("Copy Failed!");
+    showToast("Copy Failed","error");
 
-    }
+}
 
 });
 
@@ -150,8 +209,18 @@ clearBtn.addEventListener("click", () => {
 
     inputText.value = "";
     outputText.value = "";
+    progressBar.style.width="0%";
 
     inputText.focus();
+    status.textContent = "Ready to Translate";
+    status.className = "";
+    clearBtn.style.transform = "rotate(360deg)";
+
+setTimeout(() => {
+
+    clearBtn.style.transform = "rotate(0deg)";
+
+},500);
 
 });
 
@@ -185,26 +254,17 @@ swapBtn.addEventListener("click", () => {
 // Speak Button
 // ================================
 
-// ================================
-// Speak Button
-// ================================
 
-// ======================
-// Speak
-// ======================
-
-// ======================
-// Speak
-// ======================
 
 speakBtn.addEventListener("click", () => {
 
-    console.log("Speak button clicked");
-
     const text = outputText.value.trim();
 
-    if (!text) {
-        alert("Nothing to Speak!");
+    console.log("Speak Clicked");
+    console.log("Text:", text);
+
+    if (text === "") {
+        showToast("Nothing to Speak","warning");
         return;
     }
 
@@ -212,10 +272,133 @@ speakBtn.addEventListener("click", () => {
 
     const utterance = new SpeechSynthesisUtterance(text);
 
-    utterance.rate = 1;
-    utterance.pitch = 1;
-    utterance.volume = 1;
+    utterance.lang = "en-US";
+
+    utterance.onstart = () => {
+        console.log("Speech Started");
+    };
+
+    utterance.onend = () => {
+        console.log("Speech Ended");
+    };
+
+    utterance.onerror = (e) => {
+        console.log("Speech Error:", e);
+    };
 
     speechSynthesis.speak(utterance);
+
+});
+themeToggle.addEventListener("click", () => {
+
+    document.body.classList.toggle("dark-mode");
+
+    const icon = themeToggle.querySelector("i");
+
+    if(document.body.classList.contains("dark-mode")){
+
+        icon.className="fa-solid fa-sun";
+
+    }else{
+
+        icon.className="fa-solid fa-moon";
+
+    }
+
+});
+function showToast(message,type="success"){
+
+toast.textContent=message;
+
+toast.className="show";
+
+if(type==="error")
+toast.classList.add("toast-error");
+
+if(type==="warning")
+toast.classList.add("toast-warning");
+
+setTimeout(()=>{
+
+toast.className="";
+
+},2000);
+
+}
+function addHistory(original,translated){
+
+const item=document.createElement("li");
+
+item.innerHTML=`
+<b>${original}</b>
+<br>
+<i class="fa-solid fa-arrow-right"></i>
+${translated}
+`;
+
+historyList.prepend(item);
+
+if(historyList.children.length>5){
+
+historyList.removeChild(
+historyList.lastChild
+);
+
+}
+
+}
+// ================================
+// Ctrl + Enter Shortcut
+// ================================
+
+inputText.addEventListener("keydown", (e) => {
+
+    if (e.ctrlKey && e.key === "Enter") {
+
+        translateBtn.click();
+
+    }
+
+});
+window.onload = () => {
+
+    inputText.focus();
+
+    const saved = localStorage.getItem("lastTranslation");
+
+    if (saved) {
+
+        outputText.value = saved;
+
+    }
+
+};
+// ================================
+// Download Translation
+// ================================
+
+downloadBtn.addEventListener("click", () => {
+
+    const text = outputText.value.trim();
+
+    if (text === "") {
+
+        showToast("Nothing to Download", "warning");
+        return;
+    }
+
+    const blob = new Blob([text], { type: "text/plain" });
+
+    const link = document.createElement("a");
+
+    link.href = URL.createObjectURL(blob);
+
+    link.download = "translation.txt";
+
+    link.click();
+
+    URL.revokeObjectURL(link.href);
+
+    showToast("Downloaded Successfully");
 
 });

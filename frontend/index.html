@@ -14,7 +14,12 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
     <link rel="stylesheet" href="/frontend/style.css">
+    <link rel="icon" href="/frontend/favicon.png">
 </head>
+
+<body>
+
+<div id="toast"></div>
 
 <body>
 
@@ -26,6 +31,9 @@
 <i class="fa-solid fa-language"></i>
 <span>Language Translator</span>
 </div>
+<button id="themeToggle" class="theme-btn">
+    <i class="fa-solid fa-moon"></i>
+</button>
 
 <ul>
 
@@ -42,18 +50,40 @@
 
 <section class="hero" id="home">
 
-<h1>Translate Instantly Into 100+ Languages</h1>
+<div class="hero-content">
+
+<h1>
+<i class="fa-solid fa-language"></i>
+AI Powered Language Translator
+</h1>
 
 <p>
-Translate any text quickly using FastAPI and Google Translate.
-Fast, simple and accurate.
+Translate text instantly into multiple languages using
+<strong>FastAPI</strong>, <strong>Python</strong> and
+<strong>Google Translate</strong>.
+
+Fast • Accurate • Modern
 </p>
 
+<div class="hero-buttons">
+
 <a href="#translator" class="hero-btn">
+<i class="fa-solid fa-play"></i>
 Start Translating
 </a>
 
+<a href="#features" class="hero-btn secondary">
+<i class="fa-solid fa-star"></i>
+Explore Features
+</a>
+
+</div>
+
+</div>
+
 </section>
+
+<!-- ================= TRANSLATOR ================= -->
 
 <!-- ================= TRANSLATOR ================= -->
 
@@ -62,105 +92,112 @@ Start Translating
 <div class="container">
 
 <h2>
-
 <i class="fa-solid fa-language"></i>
-
 Language Translation Tool
-
 </h2>
 
 <label>Enter Text</label>
 
-<textarea
-id="inputText"
-placeholder="Type something..."></textarea>
+<textarea id="inputText" placeholder="Type something..."></textarea>
+
+<div class="text-info">
+    <span id="charCount">Characters: 0</span>
+    <span id="wordCount">Words: 0</span>
+</div>
+
+<div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<h3 class="history-title">
+    <i class="fa-solid fa-clock-rotate-left"></i>
+    Recent Translations
+</h3>
+
+<ul id="historyList" class="history-list"></ul>
 
 <div class="language-row">
 
-<div>
+    <div>
 
-<label>Source</label>
+        <label>Source</label>
 
-<select id="sourceLang">
+        <select id="sourceLang">
+            <option value="en">English</option>
+            <option value="ur">Urdu</option>
+            <option value="fr">French</option>
+            <option value="de">German</option>
+            <option value="es">Spanish</option>
+            <option value="ar">Arabic</option>
+            <option value="hi">Hindi</option>
+            <option value="ja">Japanese</option>
+        </select>
 
-<option value="en">English</option>
-<option value="ur">Urdu</option>
-<option value="fr">French</option>
-<option value="de">German</option>
-<option value="es">Spanish</option>
-<option value="ar">Arabic</option>
-<option value="hi">Hindi</option>
-<option value="ja">Japanese</option>
+    </div>
 
-</select>
+    <button id="swapBtn">
+        <i class="fa-solid fa-right-left"></i>
+    </button>
 
-</div>
+    <div>
 
-<button id="swapBtn">
+        <label>Target</label>
 
-<i class="fa-solid fa-right-left"></i>
+        <select id="targetLang">
+            <option value="ur">Urdu</option>
+            <option value="en">English</option>
+            <option value="fr">French</option>
+            <option value="de">German</option>
+            <option value="es">Spanish</option>
+            <option value="ar">Arabic</option>
+            <option value="hi">Hindi</option>
+            <option value="ja">Japanese</option>
+        </select>
 
-</button>
-
-<div>
-
-<label>Target</label>
-
-<select id="targetLang">
-
-<option value="ur">Urdu</option>
-<option value="en">English</option>
-<option value="fr">French</option>
-<option value="de">German</option>
-<option value="es">Spanish</option>
-<option value="ar">Arabic</option>
-<option value="hi">Hindi</option>
-<option value="ja">Japanese</option>
-
-</select>
-
-</div>
+    </div>
 
 </div>
 
 <button id="translateBtn">
-
-<i class="fa-solid fa-language"></i>
-
-Translate
-
+    <i class="fa-solid fa-language"></i>
+    Translate
 </button>
+
+<div class="status-box">
+    <span id="status">Ready to Translate</span>
+</div>
 
 <label>Translated Text</label>
 
-<textarea
-id="outputText"
-readonly
-placeholder="Translation appears here..."></textarea>
+<textarea id="outputText" readonly placeholder="Translation appears here..."></textarea>
 
 <div class="buttons">
 
-<button id="copyBtn">
-<i class="fa-solid fa-copy"></i>
-Copy
-</button>
+    <button id="copyBtn">
+        <i class="fa-solid fa-copy"></i>
+        Copy
+    </button>
 
-<button id="speakBtn">
-<i class="fa-solid fa-volume-high"></i>
-Speak
-</button>
+    <button id="downloadBtn">
+        <i class="fa-solid fa-download"></i>
+        Download
+    </button>
 
-<button id="clearBtn">
-<i class="fa-solid fa-trash"></i>
-Clear
-</button>
+    <button id="speakBtn">
+        <i class="fa-solid fa-volume-high"></i>
+        Speak
+    </button>
+
+    <button id="clearBtn">
+        <i class="fa-solid fa-trash"></i>
+        Clear
+    </button>
 
 </div>
 
 </div>
 
 </section>
-
 <!-- ================= FEATURES ================= -->
 
 <section class="features" id="features">
