@@ -1,97 +1,64 @@
-# 🌍 Language Translator
+# 🌍 AI Language Translator
 
-A modern and responsive **Language Translator Web Application** developed as part of the **CodeAlpha Python Programming Internship**.
+An AI-powered Language Translator developed as part of the **CodeAlpha Python Programming Internship**.
 
-The application allows users to translate text into multiple languages using **FastAPI** and **Google Translate API** with a clean and user-friendly interface.
+This application allows users to translate text between multiple languages using **FastAPI** and **Google Translate API**. It provides a clean, responsive interface with useful productivity features such as Text-to-Speech, Dark Mode, Translation History, Download Translation, Character Counter, and more.
 
 ---
 
-# ✨ Features
+## ✨ Features
 
 - 🌐 Translate text into multiple languages
-- ⚡ Fast translation using FastAPI
-- 🔄 Swap source and target languages
+- 🔊 Text-to-Speech (Speech Synthesis)
 - 📋 Copy translated text
-- 🗑️ Clear input and output
-- 📱 Responsive UI
-- 🎨 Modern interface with Hero, Features and About sections
-
-> **Note:** Text-to-Speech is an experimental feature and may depend on browser support.
+- 📥 Download translated text
+- 🌙 Dark / Light Mode
+- 📊 Character Counter
+- 📝 Word Counter
+- 📈 Translation Progress Bar
+- 🕒 Recent Translation History
+- 🔄 Swap Source & Target Languages
+- ⚡ Fast and Responsive User Interface
+- 📱 Responsive Design
 
 ---
 
-# 🛠️ Technologies Used
+## 🛠️ Technologies Used
 
 ### Frontend
 - HTML5
 - CSS3
 - JavaScript
+- Font Awesome
 
 ### Backend
 - Python
 - FastAPI
-- Googletrans API
-
-### Tools
-- Visual Studio Code
-- Git
-- GitHub
+- Google Translate API (googletrans)
 
 ---
 
-# 📂 Project Structure
+## 📂 Project Structure
 
-```text
+```
 Language-Translator/
 │
 ├── backend/
 │   ├── main.py
 │   ├── requirements.txt
-│   └── ...
 │
 ├── frontend/
 │   ├── index.html
 │   ├── style.css
-│   └── script.js
-│
-├── screenshots/
-│   ├── home.png
-│   ├── translator.png
-│   ├── features.png
-│   └── about.png
+│   ├── script.js
+│   ├── favicon.png
 │
 └── README.md
 ```
 
 ---
 
-# 📸 Project Screenshots
-
-## 🏠 Home Page
-
-![Home](screenshots/home.png)
-
----
-
-## 🌐 Translator
-
-![Translator](screenshots/translator.png)
-
----
-
-## ⭐ Features
-
-![Features](screenshots/features.png)
-
----
-
-## ℹ️ About
-
-![About](screenshots/about.png)
-
----
-
-# 🚀 Installation
+## 🚀 Installation
 
 ### Clone Repository
 
@@ -99,7 +66,7 @@ Language-Translator/
 git clone https://github.com/nadiaabbas933-design/Language-Translator.git
 ```
 
-### Go to Project Folder
+### Open Project
 
 ```bash
 cd Language-Translator
@@ -108,45 +75,71 @@ cd Language-Translator
 ### Install Dependencies
 
 ```bash
-pip install -r backend/requirements.txt
+pip install -r requirements.txt
 ```
 
 ### Run FastAPI Server
 
 ```bash
-cd backend
 uvicorn main:app --reload
 ```
 
-Open your browser and visit:
+### Open Browser
 
-```text
+```
 http://127.0.0.1:8000
 ```
 
 ---
 
-# 💡 Future Improvements
+## 📸 Screenshots
 
-- Voice Input
-- Better Text-to-Speech support
-- Translation History
-- Favorite Translations
-- Dark Mode
-- More Languages
+### 🏠 Home Page
+
+_Add Home Page Screenshot Here_
+
+### 🌍 Translator
+
+_Add Translator Screenshot Here_
+
+### 🌙 Dark Mode
+
+_Add Dark Mode Screenshot Here_
 
 ---
 
-# 👩‍💻 Developed By
+## 🎥 Demo Video
+
+Project demonstration video:
+
+**(Add your YouTube or LinkedIn video link here.)**
+
+---
+
+## 💡 Future Improvements
+
+- 🎤 Voice Input (Speech Recognition)
+- ❤️ Favorite Translations
+- 📄 PDF Translation
+- 🌍 Auto Language Detection
+- 📱 Mobile Application
+- 🤖 AI-powered Translation Suggestions
+
+---
+
+## 👩‍💻 Developed By
 
 **Nadia Abbas**
 
-BS Computer Science Student
+Computer Science Student
 
 CodeAlpha Python Programming Internship
 
+GitHub:
+https://github.com/nadiaabbas933-design
+
 ---
 
-# ⭐ If you like this project
+## ⭐ If you like this project
 
-Please consider giving this repository a **Star ⭐** on GitHub.
+Please consider giving this repository a **Star ⭐**.
